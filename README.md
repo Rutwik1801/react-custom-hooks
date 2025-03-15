@@ -1,50 +1,60 @@
-# React + TypeScript + Vite
+# react-beautiful-hooks-library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Super useful react + ts hooks all in one place
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install this package with npm
 
-## Expanding the ESLint configuration
+```bash
+  npm i react-beautiful-hooks-library
+```
+    
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Hooks list
 
-- Configure the top-level `parserOptions` property like this:
+### useDebounce
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Delays updating a value until a specified amount of time has passed
+
+```javascript
+import {useDebounce} from 'react-beautiful-hooks-library'
+
+export default function App() {
+    const func = () => {
+        console.log("this needs to be debounced");
+    }
+    const debouncedFunction = useDebounce(func, 100);
+  return (<YourComponents />);
+}
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### useBroadcastChannel
+Leverages the BroadcastChannel API to enable real-time communication between 
+different tabs or windows of the same origin
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```javascript
+import {useBroadcastChannel} from 'react-beautiful-hooks-library'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+export default function App() {
+    const {messages, sendMessage, isConnected} = useBroadcastChannel("channel name")
+  return (<YourComponents />);
+}
+```
+
+### useRefCallback
+
+Combines useRef and useCallback to dynamically assign and track a reference (ref) to a DOM element or component instance. It is useful when you need to perform actions when a ref changes
+
+```javascript
+import {useRefCallback} from 'react-beautiful-hooks-library'
+
+export default function App() {
+    const [message, sendMessage] = useState("");
+    const func = () => {
+        setMessage("hello world");
+    }
+    const refCallbackFunc = useRefCallback(func, [message]);
+  return (<YourComponents onClick={refCallbackFunc} />);
+}
 ```
