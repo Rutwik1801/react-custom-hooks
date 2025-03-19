@@ -59,7 +59,7 @@ export default function App() {
 }
 ```
 
-### useRefCallback
+### usePrevious
 
 Tracks the previous value of a state.
 
