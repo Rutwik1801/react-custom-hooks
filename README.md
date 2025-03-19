@@ -58,3 +58,24 @@ export default function App() {
   return (<YourComponents onClick={refCallbackFunc} />);
 }
 ```
+
+### useRefCallback
+
+Tracks the previous value of a state.
+
+```javascript
+import {usePrevious} from 'react-beautiful-hooks-library'
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {prevCount ?? "N/A"}</p>
+      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+    </div>
+  );
+}
+```
