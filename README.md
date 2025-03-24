@@ -79,3 +79,35 @@ export default function App() {
   );
 }
 ```
+
+### usePolling
+
+Executes polling for a given function
+
+```javascript
+import {usePolling} from 'react-beautiful-hooks-library'
+
+function App() {
+  const { start, pause, stop, result } = usePolling(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulating async delay
+    return "hello";
+  }, 5000);
+
+  useEffect(() => {
+    start();
+    return () => stop();
+  }, []);
+
+  return (
+    <>
+      <h1>{result}</h1>
+      <button onClick={pause}>Pause</button>
+      <button onClick={start}>Resume</button>
+      <button onClick={stop}>Stop</button>
+    </>
+  );
+}
+
+export default App;
+
+```
